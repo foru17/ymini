@@ -1,0 +1,24 @@
+{
+  "name": "ymini",
+  "version": "1.0.0",
+  "description": "A gulp base bin tool for minify js and css",
+  "main": "index.js",
+  "bin": {
+    "ymini": "bin/ymini"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "luolei",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "optimist": "^0.6.1",
+    "pump": "^1.0.1"
+  }
+}
