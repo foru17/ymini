@@ -1,20 +1,37 @@
 {
   "name": "ymini",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "A gulp base bin tool for minify js and css",
   "main": "index.js",
+  "homepage": "https://github.com/foru17/ymini#readme",
   "bin": {
     "ymini": "bin/ymini"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foru17/ymini.git"
+  },
   "keywords": [
     "javascript"
   ],
-  "author": "luolei",
+  "author": {
+    "name": "@foru17 <meleilei@gmail.com>"
+  },
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foru17/ymini/issues"
+  },
+  "_npmUser": {
+    "name": "foru17",
+    "email": "meleilei@gmail.com"
+  },
   "dependencies": {
+    "chalk": "^1.1.3",
+    "exec": "^0.2.1",
+    "figlet": "^1.1.2",
     "gulp": "^3.9.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
