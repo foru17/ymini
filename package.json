@@ -1,6 +1,6 @@
 {
   "name": "ymini",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A gulp base bin tool for minify js and css",
   "main": "index.js",
   "homepage": "https://github.com/foru17/ymini#readme",
@@ -37,6 +37,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "optimist": "^0.6.1",
+    "path": "^0.12.7",
     "pump": "^1.0.1"
   }
 }

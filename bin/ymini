@@ -7,15 +7,12 @@ process.title = 'ymini';
 var figlet = require('figlet');
 var exec = require('exec');
 var chalk = require('chalk');
-
-
-
-
-// var spawn = require('cross-spawn');
+var path = require("path");
 
 var ymini = require('../gulpfile.js'),
 	optimist = require('optimist')
 	.usage(chalk.red('一个压缩工具'))
+	.alias('v', 'version')
 	.alias('js', 'javascript')
 	.alias('css', 'css')
 	.describe(chalk.green('js'), ':压缩js')
@@ -24,34 +21,28 @@ var ymini = require('../gulpfile.js'),
 var argv = optimist.argv;
 var text = argv._.join(' ');
 var options = {};
-
+var _yminiPath = path.resolve(__dirname, '..');
 
 if (argv.version) {
 	return console.log('当前版本:' + require('../package.json').version);
 }
 
-// console.log(argv);
-
-
 
 if (argv.javascript) {
-	var _path = argv['path'];
 
-	exec('gulp scripts --path ' + _path, function(err, out, code) {
+	var _path = argv['path'];
+	exec('cd '  + _yminiPath + '&& gulp scripts --path ' + _path, function(err, out, code) {
 		if (err instanceof Error)
 			throw err;
 		process.stderr.write(err);
 		process.stdout.write(out);
 		process.exit(code);
 	});
-	// return console.log('处理路径是' + _path);
-	return console.log('cd Ymini && gulp scripts --path ' + _path);
-	// return console.log('执行js压缩');
+	console.log('gulp scripts --path ' + _path);
 }
 
 if (argv.css) {
 	var _path = argv['path'];
-
 	exec('gulp css --path ' + _path, function(err, out, code) {
 		if (err instanceof Error)
 			throw err;
@@ -59,7 +50,6 @@ if (argv.css) {
 		process.stdout.write(out);
 		process.exit(code);
 	});
-	// return console.log('处理路径是' + _path);
+
 	return console.log(' gulp scripts --path ' + _path);
-	// return console.log('执行js压缩');
 }
