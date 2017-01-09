@@ -7,12 +7,19 @@ var cleanCSS = require('gulp-clean-css');
 gulp.task('scripts', function(cb) {
     console.log('执行js压缩');
     var _progressPash = gutil.env.path ? gutil.env.path : '';
-    var _progressJsPash = _progressPash + '/**/*.js'
-    console.log(_progressPash);
+    var _progressJsPash;
+    // 如果是目录
+    if((_progressPash).lastIndexOf('.js') > -1){
+    	 _progressJsPash = _progressPash;
+    }else{
+    	_progressJsPash = _progressPash+ '/**/*.js';
+    }
     pump([
             gulp.src(_progressJsPash),
             uglify(),
-            gulp.dest(_progressPash)
+            gulp.dest(function(file){
+            	return file.base
+            })
         ],
         cb
     );
@@ -22,8 +29,22 @@ gulp.task('scripts', function(cb) {
 gulp.task('css', function(cb) {
     console.log('执行css压缩');
     var _progressPash = gutil.env.path ? gutil.env.path : '';
-    var _progressCssPash = _progressPash + '/**/*.css'
-    return gulp.src(_progressCssPash)
-        .pipe(cleanCSS({ compatibility: 'ie8' }))
-        .pipe(gulp.dest(_progressPash));
+    var _progressCssPash = _progressPash + '/**/*.css';
+    var _progressJsPash;
+
+    // 如果是目录
+    if((_progressPash).lastIndexOf('.css') > -1){
+    	 _progressJsPash = _progressPash;
+    }else{
+    	_progressJsPash = _progressPash+ '/**/*.css';
+    }
+    pump([
+            gulp.src(_progressJsPash),
+            cleanCSS({ compatibility: 'ie8' }),
+            gulp.dest(function(file){
+            	return file.base
+            })
+        ],
+        cb
+    );
 });

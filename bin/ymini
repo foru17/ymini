@@ -23,14 +23,31 @@ var text = argv._.join(' ');
 var options = {};
 var _yminiPath = path.resolve(__dirname, '..');
 
-if (argv.version) {
-	return console.log('当前版本:' + require('../package.json').version);
-}
+// 获得当前任务的路径
+var SHELL_PATH = process.env.PWD.replace(/ /g, '\\ ');
 
+/**
+ * 显示版本信息
+ * @param  {[type]} argv.version [description]
+ * @return {[type]}              [description]
+ */
+if (argv.version) {
+
+	figlet(require('../package.json').version, function(err, data) {
+		if (err) {
+			console.log('Something went wrong...');
+			console.log(chalk.green(data));
+			return;
+		}
+		console.log(chalk.red('当前版本:'));
+		console.log(data);
+	});
+
+}
 
 if (argv.javascript) {
 
-	var _path = argv['path'];
+	var _path = path.resolve(argv['path']);
 	exec('cd '  + _yminiPath + '&& gulp scripts --path ' + _path, function(err, out, code) {
 		if (err instanceof Error)
 			throw err;
@@ -42,8 +59,8 @@ if (argv.javascript) {
 }
 
 if (argv.css) {
-	var _path = argv['path'];
-	exec('gulp css --path ' + _path, function(err, out, code) {
+	var _path = path.resolve(argv['path']);
+	exec('cd '  + _yminiPath +  '&& gulp css --path ' + _path, function(err, out, code) {
 		if (err instanceof Error)
 			throw err;
 		process.stderr.write(err);
