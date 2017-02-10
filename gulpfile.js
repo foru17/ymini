@@ -16,7 +16,11 @@ gulp.task('scripts', function(cb) {
     }
     pump([
             gulp.src(_progressJsPash),
-            uglify(),
+            uglify({
+                mangle:{
+                    except:['define','require','module','exports']
+                }
+            }),
             gulp.dest(function(file){
             	return file.base
             })
