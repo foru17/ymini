@@ -44,7 +44,7 @@ gulp.task('css', function(cb) {
     }
     pump([
             gulp.src(_progressJsPash),
-            cleanCSS({ compatibility: 'ie8' }),
+            cleanCSS({ compatibility: 'ie8' ,processImport: false}),
             gulp.dest(function(file){
             	return file.base
             })
