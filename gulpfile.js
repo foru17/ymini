@@ -48,7 +48,8 @@ gulp.task('css', function(cb) {
             cleanCSS({
                 debug:true,
                 compatibility: 'ie8',
-                processImport: false
+                processImport: false,
+                inline:'none'
             }, function(file) {
                 console.log('[压缩CSS]' + file.name + ': [' + filesize(file.stats.originalSize) + ' >> ' + filesize(file.stats.minifiedSize) + ']');
             }),
