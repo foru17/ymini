@@ -19,8 +19,15 @@ gulp.task('scripts', function(cb) {
             gulp.src(_progressJsPash),
             uglify({
                 mangle: {
-                    except: ['define', 'require', 'module', 'exports']
+                    except: ['define', 'require', 'module', 'exports'],
+                },
+                output:{
+                    keep_quoted_props:true
                 }
+
+            }).on('error',function(e){
+                console.log('出错了')
+                console.log('[JS文件异常]' + e)
             }),
             gulp.dest(function(file) {
                 return file.base
@@ -29,7 +36,6 @@ gulp.task('scripts', function(cb) {
         cb
     );
 });
-
 
 gulp.task('css', function(cb) {
     console.log('执行css压缩');
