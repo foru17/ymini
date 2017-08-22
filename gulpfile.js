@@ -24,7 +24,6 @@ gulp.task('scripts', function(cb) {
                 output:{
                     keep_quoted_props:true
                 }
-
             }).on('error',function(e){
                 console.log('出错了')
                 console.log('[JS文件异常]' + e)

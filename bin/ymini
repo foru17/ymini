@@ -8,6 +8,7 @@ var figlet = require('figlet');
 var exec = require('exec');
 var chalk = require('chalk');
 var path = require('path');
+var child = require('child_process');
 
 var ymini = require('../gulpfile.js');
 var	optimist = require('optimist')
@@ -23,8 +24,8 @@ var text = argv._.join(' ');
 var options = {};
 var YMINI_PATH = path.resolve(__dirname, '..');
 
-// 获得当前任务的路径
-var SHELL_PATH = process.env.PWD.replace(/ /g, '\\ ');
+// gulp任务初始参数
+let args = ['--gulpfile', path.join(YMINI_PATH, 'gulpfile.js')];
 
 /**
  * 显示版本信息
@@ -45,25 +46,20 @@ if (argv.version) {
 
 if (argv.javascript) {
 	var AbsPath = path.resolve(argv['path']);
-	exec('cd '  + YMINI_PATH + '&& gulp scripts --path ' + AbsPath, function(err, out, code) {
-		if (err instanceof Error)
-			throw err;
-		process.stderr.write(err);
-		process.stdout.write(out);
-		process.exit(code);
-	});
-	console.log('gulp scripts --path ' + AbsPath);
+	args = args.concat('scripts','--path', AbsPath);
+	try{
+		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args);
+	}catch(e){
+		console.log(e)
+	}
 }
 
 if (argv.css) {
 	var AbsPath = path.resolve(argv['path']);
-	exec('cd '  + YMINI_PATH +  '&& gulp css --path ' + AbsPath, function(err, out, code) {
-		if (err instanceof Error)
-			throw err;
-		process.stderr.write(err);
-		process.stdout.write(out);
-		process.exit(code);
-	});
-
-	return console.log(' gulp scripts --path ' + AbsPath);
+	args = args.concat('css','--path', AbsPath);
+	try{
+		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args)
+	}catch(e){
+		console.log(e)
+	}
 }
