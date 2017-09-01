@@ -5,7 +5,7 @@ var pump = require('pump');
 var cleanCSS = require('gulp-clean-css');
 var filesize = require('filesize');
 
-gulp.task('scripts', function(cb) {
+gulp.task('scripts', function() {
     console.log('执行js压缩');
     var _progressPash = gutil.env.path ? gutil.env.path : '';
     var _progressJsPash;
@@ -19,11 +19,12 @@ gulp.task('scripts', function(cb) {
             gulp.src(_progressJsPash),
             uglify({
                 mangle: {
-                    except: ['define', 'require', 'module', 'exports'],
+                    reserved: ['define', 'require', 'module', 'exports'],
                 },
                 output:{
                     keep_quoted_props:true
-                }
+                },
+                ie8: true
             }).on('error',function(e){
                 console.log('出错了')
                 console.log('[JS文件异常]' + e)
@@ -31,8 +32,7 @@ gulp.task('scripts', function(cb) {
             gulp.dest(function(file) {
                 return file.base
             })
-        ],
-        cb
+        ]
     );
 });
 
