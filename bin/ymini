@@ -5,7 +5,6 @@
 process.title = 'ymini';
 
 var figlet = require('figlet');
-var exec = require('exec');
 var chalk = require('chalk');
 var path = require('path');
 var child = require('child_process');
@@ -27,6 +26,9 @@ var YMINI_PATH = path.resolve(__dirname, '..');
 // gulp任务初始参数
 let args = ['--gulpfile', path.join(YMINI_PATH, 'gulpfile.js')];
 
+console.log(argv)
+
+
 /**
  * 显示版本信息
  * @param  {[type]} argv.version [description]
@@ -42,6 +44,17 @@ if (argv.version) {
 		console.log(chalk.red('当前版本:'));
 		console.log(data);
 	});
+	return false;
+}
+
+if (argv.smart) {
+	var AbsPath = path.resolve(argv['path']);
+	args = args.concat('smart','--path', AbsPath);
+	try{
+		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args)
+	}catch(e){
+		console.log(e)
+	}
 }
 
 if (argv.javascript) {
@@ -55,6 +68,16 @@ if (argv.javascript) {
 }
 
 if (argv.css) {
+	var AbsPath = path.resolve(argv['path']);
+	args = args.concat('css','--path', AbsPath);
+	try{
+		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args)
+	}catch(e){
+		console.log(e)
+	}
+}
+
+if (argv['_'].length == 0) {
 	var AbsPath = path.resolve(argv['path']);
 	args = args.concat('css','--path', AbsPath);
 	try{
