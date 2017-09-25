@@ -1,6 +1,6 @@
 {
   "name": "ymini",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "A gulp base bin tool for minify js and css",
   "main": "index.js",
   "homepage": "https://github.com/foru17/ymini#readme",
@@ -34,13 +34,12 @@
     "filesize": "^3.5.6",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.0.3",
+    "gulp-count": "^0.3.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.7",
     "optimist": "^0.6.1",
     "path": "^0.12.7",
-    "pump": "^1.0.1"
-  },
-  "devDependencies": {
+    "pump": "^1.0.1",
     "gulp-filter": "^5.0.1",
     "gulp-plumber": "^1.1.0"
   }

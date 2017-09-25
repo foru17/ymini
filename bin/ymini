@@ -26,9 +26,6 @@ var YMINI_PATH = path.resolve(__dirname, '..');
 // gulp任务初始参数
 let args = ['--gulpfile', path.join(YMINI_PATH, 'gulpfile.js')];
 
-console.log(argv)
-
-
 /**
  * 显示版本信息
  * @param  {[type]} argv.version [description]
@@ -47,39 +44,9 @@ if (argv.version) {
 	return false;
 }
 
-if (argv.smart) {
-	var AbsPath = path.resolve(argv['path']);
-	args = args.concat('smart','--path', AbsPath);
-	try{
-		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args)
-	}catch(e){
-		console.log(e)
-	}
-}
-
-if (argv.javascript) {
-	var AbsPath = path.resolve(argv['path']);
-	args = args.concat('scripts','--path', AbsPath);
-	try{
-		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args);
-	}catch(e){
-		console.log(e)
-	}
-}
-
-if (argv.css) {
-	var AbsPath = path.resolve(argv['path']);
-	args = args.concat('css','--path', AbsPath);
-	try{
-		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args)
-	}catch(e){
-		console.log(e)
-	}
-}
-
 if (argv['_'].length == 0) {
 	var AbsPath = path.resolve(argv['path']);
-	args = args.concat('css','--path', AbsPath);
+	args = args.concat('smart','--path', AbsPath);
 	try{
 		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args)
 	}catch(e){
