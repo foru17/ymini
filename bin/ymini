@@ -44,9 +44,18 @@ if (argv.version) {
 	return false;
 }
 
-if (argv['_'].length == 0) {
-	var AbsPath = path.resolve(argv['path']);
+
+if (argv['_'].length >= 0) {
+	if(typeof(argv['path']) !== 'undefined'){
+		var AbsPath = ((argv['path'] == true) ? path.resolve('./') : path.resolve(argv['path']))	
+	}else{
+		var AbsPath = ((argv['_'].length > 0) ? path.resolve(argv['_'][0]) : path.resolve('./'))	
+		console.log(AbsPath)
+	}
+
 	args = args.concat('smart','--path', AbsPath);
+	console.log('[YMINI START] ' + AbsPath)
+
 	try{
 		var task = child.fork(path.join(YMINI_PATH, 'node_modules/gulp/bin/gulp'), args)
 	}catch(e){
